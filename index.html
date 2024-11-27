@@ -29,7 +29,7 @@
         }
 
         header img {
-            height: 50px;
+            height: 65px; /* Incrementa el tamaño del logo (30% más grande) */
         }
 
         nav ul {
@@ -37,7 +37,7 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 20px; /* Espacio entre enlaces */
+            gap: 15px; /* Espacio entre las palabras */
         }
 
         nav ul li {
@@ -63,6 +63,8 @@
             background: none;
             border: none;
             color: #6B4E37;
+            margin-left: auto; /* Corre el botón 20% más a la derecha */
+            margin-right: 20px; /* Ajuste adicional */
         }
 
         /* Menú responsive (pantallas pequeñas) */
@@ -94,7 +96,7 @@
             nav ul {
                 display: flex;
                 gap: 20px; /* Espacio entre enlaces */
-                justify-content: flex-end;
+                justify-content: flex-start; /* Ajustar a la izquierda */
             }
 
             .menu-toggle {

@@ -2,11 +2,90 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Prueba de Imágenes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Carrusel</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .carousel img {
+            position: absolute;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            top: 0;
+            left: 0;
+        }
+        .carousel img.active {
+            opacity: 1;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .carousel-controls button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
 </head>
 <body>
-    <h1>Prueba de imágenes</h1>
-    <img src="./imagenes/logo-vysa.png" alt="Logo VYSA">
-    <img src="./imagenes/tratamiento1.jpg" alt="Tratamiento 1">
+    <h1>Prueba de Carrusel</h1>
+    <div class="carousel">
+        <img src="./imagenes/carrusel1.jpg" alt="Carrusel 1" class="active">
+        <img src="./imagenes/carrusel2.jpg" alt="Carrusel 2">
+        <img src="./imagenes/carrusel3.jpg" alt="Carrusel 3">
+        <div class="carousel-controls">
+            <button onclick="prevSlide()">❮</button>
+            <button onclick="nextSlide()">❯</button>
+        </div>
+    </div>
+
+    <script>
+        // Carrusel básico
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Cambiar automáticamente cada 5 segundos
+        setInterval(nextSlide, 5000);
+    </script>
 </body>
 </html>

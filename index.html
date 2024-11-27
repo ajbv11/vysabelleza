@@ -38,47 +38,6 @@
             margin: 70px auto 20px;
             max-width: 200px;
         }
-        .carousel {
-            position: relative;
-            width: 100%;
-            max-height: 500px;
-            overflow: hidden;
-        }
-        .carousel img {
-            position: absolute;
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            top: 0;
-            left: 0;
-        }
-        .carousel img.active {
-            opacity: 1;
-            z-index: 1;
-        }
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-        .carousel-controls button {
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 24px;
-            padding: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .carousel-controls button:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
         .section {
             padding: 100px 20px;
             text-align: center;
@@ -90,18 +49,6 @@
             margin-bottom: 20px;
             font-size: 32px;
             color: #6B4E37;
-        }
-        .imagenes-servicios {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .imagenes-servicios img {
-            width: 300px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         footer {
             background: #EADDCB;
@@ -127,21 +74,29 @@
 
     <div class="section" id="inicio">
         <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza" class="logo">
-        <div class="carousel">
-            <img src="./imagenes/carrusel1.jpg" alt="Carrusel 1" class="active">
-            <img src="./imagenes/carrusel2.jpg" alt="Carrusel 2">
-            <img src="./imagenes/carrusel3.jpg" alt="Carrusel 3">
-            <div class="carousel-controls">
-                <button onclick="prevSlide()">❮</button>
-                <button onclick="nextSlide()">❯</button>
-            </div>
-        </div>
+        <h1>Bienvenido a VYSA Belleza</h1>
+        <p>Descubre la belleza que llevas dentro con nuestros servicios avanzados de estética.</p>
     </div>
 
     <div class="section servicios" id="servicios">
         <h2>Nuestros Servicios</h2>
-        <div class="imagenes-servicios">
-            <img src="./imagenes/tratamiento1.jpg" alt="Tratamiento 1">
-            <img src="./imagenes/tratamiento2.jpg" alt="Tratamiento 2">
-            <img src="./imagenes/tratamien
+        <ul>
+            <li>Tratamientos Faciales</li>
+            <li>Masajes Terapéuticos</li>
+            <li>Depilación Láser</li>
+            <li>Manicure y Pedicure</li>
+        </ul>
+    </div>
 
+    <div class="section contacto" id="contacto">
+        <h2>Contacto</h2>
+        <p>Email: info@vysabelleza.es</p>
+        <p>Teléfono: +34 123 456 789</p>
+        <p><a href="https://wa.me/1234567890" target="_blank">Contáctanos por WhatsApp</a></p>
+    </div>
+
+    <footer>
+        <p>© 2024 VYSA Belleza. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

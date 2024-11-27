@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VYSA Belleza</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #4A4A4A;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #EADDCB;
+            color: #6B4E37;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #6B4E37;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        header nav a:hover {
+            color: #A47C61;
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+        }
+        .carousel img {
+            position: absolute;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            top: 0;
+            left: 0;
+        }
+        .carousel img.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        .carousel img.inactive {
+            z-index: 0;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .carousel-controls button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .servicios {
+            background: #FAF3E7;
+        }
+        .servicios h2 {
+            margin-bottom: 20px;
+            font-size: 32px;
+            color: #6B4E37;
+        }
+        .servicios ul {
+            list-style: none;
+            padding: 0;
+        }
+        .servicios ul li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        footer {
+            background: #EADDCB;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #6B4E37;
+        }
+        footer a {
+            color: #6B4E37;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <div class="carousel" id="inicio">
+        <img src="./imagenes/carrusel1.jpg" alt="Imagen 1" class="active">
+        <img src="./imagenes/carrusel2.jpg" alt="Imagen 2" class="inactive">
+        <img src="./imagenes/carrusel3.jpg" alt="Imagen 3" class="inactive">
+        <div class="carousel-controls">
+            <button onclick="prevSlide()">❮</button>
+            <button onclick="nextSlide()">❯</button>
+        </div>
+    </div>
+
+    <div class="section servicios" id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <ul>
+            <li>Tratamientos Faciales</li>
+            <li>Masajes Terapéuticos</li>
+            <li>Depilación Láser</li>
+            <li>Manicure y Pedicure</li>
+        </ul>
+    </div>
+
+    <div class="section contacto" id="contacto">
+        <h2>Contacto</h2>
+        <p>Email: info@vysabelleza.es</p>
+        <p>Teléfono: +34 123 456 789</p>
+        <p><a href="https://wa.me/1234567890" target="_blank">Contáctanos por WhatsApp</a></p>
+    </div>
+
+    <footer>
+        <p>© 2024 VYSA Belleza. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('inactive');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.remove('inactive');
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        setInterval(nextSlide, 5000); // Cambiar cada 5 segundos
+    </script>
+</body>
+</html>

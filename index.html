@@ -33,6 +33,11 @@
         header nav a:hover {
             color: #A47C61;
         }
+        .logo {
+            display: block;
+            margin: 70px auto 20px;
+            max-width: 200px;
+        }
         .carousel {
             position: relative;
             width: 100%;
@@ -52,9 +57,6 @@
         .carousel img.active {
             opacity: 1;
             z-index: 1;
-        }
-        .carousel img.inactive {
-            z-index: 0;
         }
         .carousel-controls {
             position: absolute;
@@ -89,13 +91,17 @@
             font-size: 32px;
             color: #6B4E37;
         }
-        .servicios ul {
-            list-style: none;
-            padding: 0;
+        .imagenes-servicios {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
         }
-        .servicios ul li {
-            font-size: 18px;
-            margin: 10px 0;
+        .imagenes-servicios img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         footer {
             background: #EADDCB;
@@ -119,58 +125,23 @@
         </nav>
     </header>
 
-    <div class="carousel" id="inicio">
-        <img src="./imagenes/carrusel1.jpg" alt="Imagen 1" class="active">
-        <img src="./imagenes/carrusel2.jpg" alt="Imagen 2" class="inactive">
-        <img src="./imagenes/carrusel3.jpg" alt="Imagen 3" class="inactive">
-        <div class="carousel-controls">
-            <button onclick="prevSlide()">❮</button>
-            <button onclick="nextSlide()">❯</button>
+    <div class="section" id="inicio">
+        <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza" class="logo">
+        <div class="carousel">
+            <img src="./imagenes/carrusel1.jpg" alt="Carrusel 1" class="active">
+            <img src="./imagenes/carrusel2.jpg" alt="Carrusel 2">
+            <img src="./imagenes/carrusel3.jpg" alt="Carrusel 3">
+            <div class="carousel-controls">
+                <button onclick="prevSlide()">❮</button>
+                <button onclick="nextSlide()">❯</button>
+            </div>
         </div>
     </div>
 
     <div class="section servicios" id="servicios">
         <h2>Nuestros Servicios</h2>
-        <ul>
-            <li>Tratamientos Faciales</li>
-            <li>Masajes Terapéuticos</li>
-            <li>Depilación Láser</li>
-            <li>Manicure y Pedicure</li>
-        </ul>
-    </div>
+        <div class="imagenes-servicios">
+            <img src="./imagenes/tratamiento1.jpg" alt="Tratamiento 1">
+            <img src="./imagenes/tratamiento2.jpg" alt="Tratamiento 2">
+            <img src="./imagenes/tratamien
 
-    <div class="section contacto" id="contacto">
-        <h2>Contacto</h2>
-        <p>Email: info@vysabelleza.es</p>
-        <p>Teléfono: +34 123 456 789</p>
-        <p><a href="https://wa.me/1234567890" target="_blank">Contáctanos por WhatsApp</a></p>
-    </div>
-
-    <footer>
-        <p>© 2024 VYSA Belleza. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel img');
-
-        function showSlide(index) {
-            slides[currentSlide].classList.remove('active');
-            slides[currentSlide].classList.add('inactive');
-            currentSlide = (index + slides.length) % slides.length;
-            slides[currentSlide].classList.remove('inactive');
-            slides[currentSlide].classList.add('active');
-        }
-
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentSlide - 1);
-        }
-
-        setInterval(nextSlide, 5000); // Cambiar cada 5 segundos
-    </script>
-</body>
-</html>

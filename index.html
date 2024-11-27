@@ -20,10 +20,17 @@
             width: 100%;
             background: #EADDCB;
             color: #6B4E37;
-            padding: 10px 0;
+            padding: 10px 20px;
             text-align: center;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header img {
+            height: 40px;
         }
 
         header nav a {
@@ -43,7 +50,7 @@
             width: 100%;
             max-height: 500px;
             overflow: hidden;
-            margin: 20px auto;
+            margin: 70px auto 20px;
         }
 
         .carousel-inner {
@@ -88,7 +95,9 @@
     </style>
 </head>
 <body>
+    <!-- Encabezado con logo -->
     <header>
+        <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
@@ -96,8 +105,8 @@
         </nav>
     </header>
 
+    <!-- Carrusel -->
     <div class="section" id="inicio">
-        <h1>Bienvenido a VYSA Belleza</h1>
         <div class="carousel">
             <div class="carousel-inner">
                 <img src="./imagenes/carrusel11.jpg" alt="Carrusel 1">
@@ -107,6 +116,7 @@
         </div>
     </div>
 
+    <!-- Sección de servicios -->
     <div class="section servicios" id="servicios">
         <h2>Nuestros Servicios</h2>
         <ul>
@@ -117,6 +127,7 @@
         </ul>
     </div>
 
+    <!-- Sección de contacto -->
     <div class="section contacto" id="contacto">
         <h2>Contacto</h2>
         <p>Email: info@vysabelleza.es</p>
@@ -124,6 +135,7 @@
         <p><a href="https://wa.me/1234567890" target="_blank">Contáctanos por WhatsApp</a></p>
     </div>
 
+    <!-- Pie de página -->
     <footer>
         <p>© 2024 VYSA Belleza. Todos los derechos reservados.</p>
     </footer>

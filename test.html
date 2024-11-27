@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba de Carrusel - Slide</title>
+    <title>Prueba de Carrusel - Fade</title>
     <style>
         body {
             margin: 0;
@@ -20,39 +20,39 @@
             overflow: hidden;
             margin: 20px auto;
         }
-        .carousel-inner {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            transform: translateX(0);
-        }
         .carousel img {
+            position: absolute;
             width: 100%;
             height: 500px;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel img.active {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <h1>Prueba de Carrusel - Slide</h1>
+    <h1>Prueba de Carrusel - Fade</h1>
     <div class="carousel">
-        <div class="carousel-inner">
-            <img src="./imagenes/carrusel11.jpg" alt="Carrusel 1">
-            <img src="./imagenes/carrusel12.jpg" alt="Carrusel 2">
-            <img src="./imagenes/carrusel13.jpg" alt="Carrusel 3">
-        </div>
+        <img src="./imagenes/carrusel11.jpg" alt="Carrusel 1" class="active">
+        <img src="./imagenes/carrusel12.jpg" alt="Carrusel 2">
+        <img src="./imagenes/carrusel13.jpg" alt="Carrusel 3">
     </div>
 
     <script>
-        const inner = document.querySelector('.carousel-inner');
-        let currentIndex = 0;
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % 3; // Número de imágenes
-            inner.style.transform = `translateX(-${currentIndex * 100}%)`;
-            document.title = `Prueba de Carrusel - Slide ${currentIndex + 1}`;
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
         }
 
-        setInterval(nextSlide, 5000);
+        setInterval(() => showSlide(currentSlide + 1), 5000);
     </script>
 </body>
 </html>
+

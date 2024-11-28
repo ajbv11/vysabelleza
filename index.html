@@ -80,8 +80,22 @@
             margin-bottom: 20px;
         }
 
-        .agenda-boton {
+        .galeria-imagen {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .galeria-imagen:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .boton-galeria {
             display: inline-block;
+            margin-top: 20px;
             padding: 15px 30px;
             background-color: #6B4E37;
             color: #FFFFFF;
@@ -92,7 +106,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .agenda-boton:hover {
+        .boton-galeria:hover {
             background-color: #A47C61;
         }
 
@@ -107,19 +121,6 @@
         footer a {
             color: #6B4E37;
             text-decoration: none;
-        }
-
-        .galeria-imagen {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .galeria-imagen:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -144,25 +145,26 @@
         <p>Descubre la mejor experiencia en estética avanzada.</p>
     </div>
 
-    <!-- Sección de Galería -->
+    <!-- Sección Galería -->
     <div class="section" id="galeria">
         <h2>Galería</h2>
         <p>Explora nuestros servicios y resultados en nuestra galería completa.</p>
         <a href="./galeria.html">
             <img src="./imagenes/galeria-principal.jpg" alt="Galería Principal" class="galeria-imagen">
         </a>
+        <a href="./galeria.html" class="boton-galeria">Ver Galería Completa</a>
     </div>
 
-    <!-- Sección de Agenda -->
+    <!-- Sección Agenda -->
     <div class="section" id="agenda">
         <h2>Agenda tu Cita</h2>
         <p>Haz clic en el botón para agendar tu cita a través de WhatsApp.</p>
-        <a href="https://wa.me/34634664945?text=Hola%2C%20quiero%20agendar%20una%20cita" target="_blank" class="agenda-boton">
+        <a href="https://wa.me/34634664945?text=Hola%2C%20quiero%20agendar%20una%20cita" target="_blank" class="boton-galeria">
             Agendar Cita
         </a>
     </div>
 
-    <!-- Pie de página -->
+    <!-- Pie de Página -->
     <footer>
         <p>© 2024 VYSA Belleza. Todos los derechos reservados.</p>
     </footer>

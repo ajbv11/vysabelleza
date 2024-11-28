@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- control 1 -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -14,50 +13,8 @@
             text-align: center;
         }
 
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #EADDCB;
-            color: #6B4E37;
-            padding: 10px 20px;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        header img {
-            height: 65px;
-        }
-
-        header .header-title {
-            font-family: 'Georgia', serif;
-            font-size: 24px;
-            font-weight: bold;
-            color: #6B4E37;
-        }
-
-        .boton-volver {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #6B4E37;
-            color: #FFFFFF;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .boton-volver:hover {
-            background-color: #A47C61;
-        }
-
         .filters {
-            margin: 100px 0 20px;
+            margin: 20px 0;
         }
 
         .filters button {
@@ -99,181 +56,45 @@
         .hidden {
             display: none;
         }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            overflow: hidden;
-        }
-
-        .modal img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        /* Botones de Navegación */
-        .modal .prev,
-        .modal .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.6);
-            border: none;
-            color: #6B4E37;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-
-        .modal .prev:hover,
-        .modal .next:hover {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .modal .prev {
-            left: 20px;
-        }
-
-        .modal .next {
-            right: 20px;
-        }
-
-        /* Cierre */
-        .modal .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
-        <div class="header-title">Galería</div>
-        <a href="./index.html" class="boton-volver" aria-label="Volver a la página principal">Volver a Inicio</a>
-    </header>
+    <h1>Galería Clasificada</h1>
 
     <!-- Filtros -->
-    <div class="filters" aria-live="polite">
-        <button onclick="filterGallery('all')" aria-label="Mostrar todas las imágenes">Todos</button>
-        <button onclick="filterGallery('labios')" aria-label="Mostrar imágenes de micropigmentación de labios">Micropigmentación de Labios</button>
-        <button onclick="filterGallery('cejas')" aria-label="Mostrar imágenes de micropigmentación de cejas">Micropigmentación de Cejas</button>
-        <button onclick="filterGallery('pestanas')" aria-label="Mostrar imágenes de lifting de pestañas">Lifting de Pestañas</button>
-        <button onclick="filterGallery('hialuropen')" aria-label="Mostrar imágenes de tratamientos Hialuropen">Tratamientos Hialuropen</button>
-        <button onclick="filterGallery('otros')" aria-label="Mostrar otras imágenes">Otros</button>
+    <div class="filters">
+        <button onclick="filterGallery('all')">Todos</button>
+        <button onclick="filterGallery('labios')">Micropigmentación de Labios</button>
+        <button onclick="filterGallery('cejas')">Micropigmentación de Cejas</button>
+        <button onclick="filterGallery('pestanas')">Lifting de Pestañas</button>
+        <button onclick="filterGallery('hialuropen')">Tratamientos Hialuropen</button>
+        <button onclick="filterGallery('otros')">Otros</button>
     </div>
 
     <!-- Galería -->
     <div class="gallery">
-        <img src="./imagenes/galeria/labios/labios1.jpg" alt="Resultado de micropigmentación de labios con técnica natural" class="labios" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/labios/labios2.jpg" alt="Resultado de micropigmentación de labios con efecto sombreado" class="labios" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Resultado de micropigmentación de cejas estilo microblading" class="cejas" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Resultado de micropigmentación de cejas con sombreado suave" class="cejas" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/pestanas/pestanas1.jpg" alt="Lifting de pestañas, resultados naturales" class="pestanas" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/pestanas/pestanas2.jpg" alt="Lifting de pestañas con efecto rizado" class="pestanas" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/hialuropen/hialuropen1.jpg" alt="Tratamiento Hialuropen para hidratación facial" class="hialuropen" loading="lazy" tabindex="0">
-        <img src="./imagenes/galeria/otros/otros1.jpg" alt="Otros servicios de VYSA Belleza" class="otros" loading="lazy" tabindex="0">
-    </div>
-
-    <!-- Modal -->
-    <div class="modal" id="imageModal" role="dialog" aria-hidden="true" aria-labelledby="modalImage">
-        <span class="close" id="closeModal" role="button" tabindex="0" aria-label="Cerrar modal">&times;</span>
-        <img src="" alt="Imagen expandida" id="modalImage">
-        <button class="prev" id="prevButton" aria-label="Imagen anterior">⟨</button>
-        <button class="next" id="nextButton" aria-label="Imagen siguiente">⟩</button>
+        <img src="./imagenes/galeria/labios/labios1.jpg" alt="Resultado de micropigmentación de labios" class="labios">
+        <img src="./imagenes/galeria/labios/labios2.jpg" alt="Resultado de micropigmentación de labios sombreado" class="labios">
+        <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Resultado de micropigmentación de cejas microblading" class="cejas">
+        <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Resultado de micropigmentación de cejas sombreado" class="cejas">
+        <img src="./imagenes/galeria/pestanas/pestanas1.jpg" alt="Lifting de pestañas naturales" class="pestanas">
+        <img src="./imagenes/galeria/pestanas/pestanas2.jpg" alt="Lifting de pestañas rizadas" class="pestanas">
+        <img src="./imagenes/galeria/hialuropen/hialuropen1.jpg" alt="Tratamiento Hialuropen" class="hialuropen">
+        <img src="./imagenes/galeria/otros/otros1.jpg" alt="Otros servicios de belleza" class="otros">
     </div>
 
     <script>
-        const body = document.body;
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        const closeModal = document.getElementById('closeModal');
-        const prevButton = document.getElementById('prevButton');
-        const nextButton = document.getElementById('nextButton');
-        const galleryImages = document.querySelectorAll('.gallery img');
-        let currentImageIndex = 0;
+        function filterGallery(category) {
+            const allImages = document.querySelectorAll('.gallery img');
 
-        const imagesArray = Array.from(galleryImages);
-
-        function showImage(index) {
-            currentImageIndex = (index + imagesArray.length) % imagesArray.length;
-            modalImage.src = imagesArray[currentImageIndex].src;
-        }
-
-        galleryImages.forEach((img, index) => {
-            img.addEventListener('click', () => {
-                modal.style.display = 'flex';
-                modalImage.src = img.src;
-                modal.setAttribute('aria-hidden', 'false');
-                body.classList.add('no-scroll');
-                currentImageIndex = index;
-            });
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
-            body.classList.remove('no-scroll');
-        });
-
-        prevButton.addEventListener('click', () => {
-            showImage(currentImageIndex - 1);
-        });
-
-        nextButton.addEventListener('click', () => {
-            showImage(currentImageIndex + 1);
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (modal.style.display === 'flex') {
-                if (event.key === 'Escape') {
-                    modal.style.display = 'none';
-                    body.classList.remove('no-scroll');
-                } else if (event.key === 'ArrowLeft') {
-                    showImage(currentImageIndex - 1);
-                } else if (event.key === 'ArrowRight') {
-                    showImage(currentImageIndex + 1);
+            allImages.forEach((img) => {
+                if (category === 'all' || img.classList.contains(category)) {
+                    img.classList.remove('hidden'); // Muestra la imagen
+                } else {
+                    img.classList.add('hidden'); // Oculta la imagen
                 }
-            }
-        });
-
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                modal.setAttribute('aria-hidden', 'true');
-                body.classList.remove('no-scroll');
-            }
-        });
+            });
+        }
     </script>
 </body>
 </html>
-

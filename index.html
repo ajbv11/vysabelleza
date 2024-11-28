@@ -59,6 +59,7 @@
             text-align: center;
             padding: 100px 20px;
             background-color: #FFFFFF;
+            color: #6B4E37; /* Color actualizado */
         }
 
         .hero img {
@@ -80,20 +81,21 @@
             margin-bottom: 20px;
         }
 
-        .galeria-imagen {
-            width: 100%;
-            max-width: 500px;
+        .gallery-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-center img {
+            max-width: 80%;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
         }
 
-        .galeria-imagen:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .boton-galeria {
+        .agenda-boton, .boton-galeria {
             display: inline-block;
             margin-top: 20px;
             padding: 15px 30px;
@@ -106,7 +108,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .boton-galeria:hover {
+        .agenda-boton:hover, .boton-galeria:hover {
             background-color: #A47C61;
         }
 
@@ -125,6 +127,7 @@
     </style>
 </head>
 <body>
+    <!-- Encabezado con logo y menú -->
     <header>
         <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
         <nav>
@@ -132,7 +135,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#tratamientos">Tratamientos</a></li>
                 <li><a href="#agenda">Agenda</a></li>
-                <li><a href="#galeria">Galería</a></li>
+                <li><a href="./galeria.html">Galería</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -145,23 +148,51 @@
         <p>Descubre la mejor experiencia en estética avanzada.</p>
     </div>
 
-    <!-- Sección Galería -->
-    <div class="section" id="galeria">
-        <h2>Galería</h2>
-        <p>Explora nuestros servicios y resultados en nuestra galería completa.</p>
-        <a href="./galeria.html">
-            <img src="./imagenes/galeria-principal.jpg" alt="Galería Principal" class="galeria-imagen">
-        </a>
-        <a href="./galeria.html" class="boton-galeria">Ver Galería Completa</a>
+    <!-- Sección Tratamientos -->
+    <div class="section" id="tratamientos">
+        <h2>Nuestros Tratamientos</h2>
+        <div class="treatments">
+            <div class="treatment-card">
+                <img src="./imagenes/tratamientos/tratamiento1.jpg" alt="Tratamiento Facial">
+                <h3>Tratamientos Faciales</h3>
+                <p>Rejuvenece tu piel con nuestras técnicas avanzadas.</p>
+            </div>
+            <div class="treatment-card">
+                <img src="./imagenes/tratamientos/tratamiento2.jpg" alt="Masajes Terapéuticos">
+                <h3>Masajes Terapéuticos</h3>
+                <p>Relájate y encuentra el equilibrio en cuerpo y mente.</p>
+            </div>
+            <div class="treatment-card">
+                <img src="./imagenes/tratamientos/tratamiento3.jpg" alt="Depilación Láser">
+                <h3>Depilación Láser</h3>
+                <p>Elimina el vello no deseado con tecnología de punta.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Sección Agenda -->
     <div class="section" id="agenda">
         <h2>Agenda tu Cita</h2>
         <p>Haz clic en el botón para agendar tu cita a través de WhatsApp.</p>
-        <a href="https://wa.me/34634664945?text=Hola%2C%20quiero%20agendar%20una%20cita" target="_blank" class="boton-galeria">
+        <a href="https://wa.me/34634664945?text=Hola%2C%20quiero%20agendar%20una%20cita" target="_blank" class="agenda-boton">
             Agendar Cita
         </a>
+    </div>
+
+    <!-- Sección Galería -->
+    <div class="section gallery-center" id="galeria">
+        <h2>Galería</h2>
+        <p>Explora nuestros servicios y resultados en nuestra galería completa.</p>
+        <img src="./imagenes/galeria-principal.jpg" alt="Galería Principal">
+        <a href="./galeria.html" class="boton-galeria">Ver Galería Completa</a>
+    </div>
+
+    <!-- Sección Contacto -->
+    <div class="section" id="contacto">
+        <h2>Contacto</h2>
+        <p>Email: info@vysabelleza.es</p>
+        <p>Teléfono: +34 634 664 945</p>
+        <p><a href="https://wa.me/+34634664945" target="_blank">Contáctanos por WhatsApp</a></p>
     </div>
 
     <!-- Pie de Página -->

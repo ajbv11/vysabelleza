@@ -11,6 +11,7 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #4A4A4A;
+            padding-top: 80px; /* Espacio para compensar el header fijo */
             overflow-x: hidden; /* Prevenir scroll horizontal */
         }
 
@@ -27,10 +28,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 60px; /* Altura del header */
         }
 
         header img {
-            height: 65px;
+            height: 50px;
         }
 
         nav {
@@ -70,7 +72,7 @@
             border: none;
             color: #6B4E37;
             position: absolute;
-            right: 30px; /* Espacio extra desde el borde derecho */
+            right: 30px;
         }
 
         @media (max-width: 768px) {
@@ -96,7 +98,7 @@
             }
 
             body {
-                overflow-y: auto; /* Asegurar scroll vertical */
+                overflow-y: auto; /* Garantizar scroll vertical */
             }
         }
 
@@ -115,7 +117,20 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Resto de los estilos omitidos por brevedad */
+        .section {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            color: #6B4E37;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            color: #6B4E37;
+        }
     </style>
 </head>
 <body>
@@ -141,7 +156,24 @@
         <p>Descubre la mejor experiencia en estética avanzada.</p>
     </div>
 
-    <!-- Resto de las secciones -->
+    <!-- Sección Tratamientos -->
+    <div class="section" id="tratamientos">
+        <h2>Nuestros Tratamientos</h2>
+        <p>Contenido de la sección tratamientos...</p>
+    </div>
+
+    <!-- Sección Agenda -->
+    <div class="section" id="agenda">
+        <h2>Agenda tu Cita</h2>
+        <p>Contenido de la sección agenda...</p>
+    </div>
+
+    <!-- Sección Contacto -->
+    <div class="section" id="contacto">
+        <h2>Contacto</h2>
+        <p>Email: info@vysabelleza.es</p>
+        <p>Teléfono: +34 634 664 945</p>
+    </div>
 
     <script>
         // Función para alternar el menú en dispositivos móviles

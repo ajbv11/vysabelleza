@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería Clasificada - VYSA Belleza</title>
+    <title>Galería - VYSA Belleza</title>
     <style>
+        /* Estilos básicos */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             color: #4A4A4A;
-            text-align: center;
+            padding-top: 60px; /* Espacio para el header fijo */
         }
 
         header {
@@ -18,192 +18,227 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #EADDCB;
+            background: #EADDCB;
             color: #6B4E37;
-            padding: 10px 20px;
+            padding: 10px 15px;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         header img {
-            height: 65px;
+            height: 50px;
         }
 
-        header .header-title {
-            font-family: 'Georgia', serif;
-            font-size: 24px;
-            font-weight: bold;
-            color: #6B4E37;
-        }
-
-        .boton-volver {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #6B4E37;
-            color: #FFFFFF;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .boton-volver:hover {
-            background-color: #A47C61;
-        }
-
-        .filters {
-            margin: 100px 0 20px;
-        }
-
-        .filters button {
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #6B4E37;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .filters button:hover {
-            background-color: #A47C61;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
             gap: 20px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #6B4E37;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #A47C61;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #6B4E37;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #EADDCB;
+                padding: 20px 0;
+                text-align: center;
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             padding: 20px;
         }
 
-        .gallery img {
+        .gallery-item img {
             width: 100%;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
-        .gallery img:hover {
+        .gallery-item img:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Estilo para imágenes expandidas */
-        .modal {
+        /* Lightbox */
+        .lightbox {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
-            z-index: 2000;
+            z-index: 10000;
         }
 
-        .modal img {
-            max-width: 80%;
-            max-height: 80%;
+        .lightbox img {
+            max-width: 90%;
+            max-height: 70%;
             border-radius: 10px;
         }
 
-        .modal .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
+        .lightbox:target {
+            display: flex;
         }
 
-        .hidden {
-            display: none;
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #FFF;
+            font-size: 30px;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .lightbox img {
+                max-width: 95%;
+                max-height: 60%;
+            }
+
+            .lightbox-close {
+                font-size: 24px;
+                padding: 10px;
+            }
+        }
+
+        footer {
+            background-color: #EADDCB;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #6B4E37;
         }
     </style>
 </head>
 <body>
-    <!-- Header con Logo, Título y Botón de Volver -->
+    <!-- Encabezado -->
     <header>
         <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
-        <div class="header-title">Galería</div>
-        <a href="./index.html" class="boton-volver">Volver a Inicio</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#tratamientos">Tratamientos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Filtros de Servicios -->
-    <div class="filters">
-        <button onclick="filterGallery('all')">Todos</button>
-        <button onclick="filterGallery('labios')">Micropigmentación de Labios</button>
-        <button onclick="filterGallery('cejas')">Micropigmentación de Cejas</button>
-        <button onclick="filterGallery('pestanas')">Lifting de Pestañas</button>
-        <button onclick="filterGallery('hialuropen')">Tratamientos Hialuropen</button>
-        <button onclick="filterGallery('otros')">Otros</button>
+    <!-- Galería -->
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <a href="#img1">
+                <img src="./imagenes/galeria1.jpg" alt="Imagen 1" loading="lazy">
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="#img2">
+                <img src="./imagenes/galeria2.jpg" alt="Imagen 2" loading="lazy">
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="#img3">
+                <img src="./imagenes/galeria3.jpg" alt="Imagen 3" loading="lazy">
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="#img4">
+                <img src="./imagenes/galeria4.jpg" alt="Imagen 4" loading="lazy">
+            </a>
+        </div>
     </div>
 
-    <!-- Galería de Imágenes -->
-    <div class="gallery">
-        <img src="./imagenes/galeria/labios/labios1.jpg" alt="Labios 1" class="labios">
-        <img src="./imagenes/galeria/labios/labios2.jpg" alt="Labios 2" class="labios">
-        <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Cejas 1" class="cejas">
-        <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Cejas 2" class="cejas">
-        <img src="./imagenes/galeria/pestanas/pestanas1.jpg" alt="Pestañas 1" class="pestanas">
-        <img src="./imagenes/galeria/pestanas/pestanas2.jpg" alt="Pestañas 2" class="pestanas">
-        <img src="./imagenes/galeria/hialuropen/hialuropen1.jpg" alt="Hialuropen 1" class="hialuropen">
-        <img src="./imagenes/galeria/otros/otros1.jpg" alt="Otros 1" class="otros">
+    <!-- Lightbox -->
+    <div id="img1" class="lightbox">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="./imagenes/galeria1.jpg" alt="Imagen 1">
+    </div>
+    <div id="img2" class="lightbox">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="./imagenes/galeria2.jpg" alt="Imagen 2">
+    </div>
+    <div id="img3" class="lightbox">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="./imagenes/galeria3.jpg" alt="Imagen 3">
+    </div>
+    <div id="img4" class="lightbox">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="./imagenes/galeria4.jpg" alt="Imagen 4">
     </div>
 
-    <!-- Modal -->
-    <div class="modal" id="imageModal">
-        <span class="close" id="closeModal">&times;</span>
-        <img src="" alt="Imagen Modal" id="modalImage">
-    </div>
+    <!-- Pie de página -->
+    <footer>
+        <p>© 2024 VYSA Belleza. Todos los derechos reservados.</p>
+    </footer>
 
-    <!-- Script para Filtros y Expansión -->
     <script>
-        function filterGallery(category) {
-            const allImages = document.querySelectorAll('.gallery img');
-
-            if (category === 'all') {
-                allImages.forEach(img => img.classList.remove('hidden'));
-            } else {
-                allImages.forEach(img => {
-                    img.classList.add('hidden');
-                    if (img.classList.contains(category)) {
-                        img.classList.remove('hidden');
-                    }
-                });
-            }
+        function toggleMenu() {
+            const menu = document.querySelector('nav ul');
+            menu.classList.toggle('active');
         }
-
-        // Expansión con Modal
-        const galleryImages = document.querySelectorAll('.gallery img');
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        const closeModal = document.getElementById('closeModal');
-
-        galleryImages.forEach((img) => {
-            img.addEventListener('click', () => {
-                modal.style.display = 'flex';
-                modalImage.src = img.src;
-            });
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
     </script>
 </body>
 </html>

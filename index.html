@@ -116,11 +116,37 @@
             margin-bottom: 20px;
         }
 
+        .treatments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            padding: 0 20px;
+        }
+
+        .treatment-card {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .treatment-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .treatment-card img:hover {
+            transform: scale(1.05);
+        }
+
         .gallery-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
         }
 
         .gallery-center img {
@@ -188,6 +214,34 @@
         <img src="./imagenes/hero.jpg" alt="Bienvenidos a VYSA Belleza">
         <h1>Bienvenidos a VYSA Belleza</h1>
         <p>Descubre la mejor experiencia en estética avanzada.</p>
+    </div>
+
+    <!-- Sección Tratamientos -->
+    <div class="section" id="tratamientos">
+        <h2>Nuestros Tratamientos</h2>
+        <div class="treatments">
+            <div class="treatment-card">
+                <a href="./galeria.html">
+                    <img src="./imagenes/tratamientos/tratamiento1.jpg" alt="Micropigmentación">
+                </a>
+                <h3>Micropigmentación</h3>
+                <p>Labios y cejas perfectos siempre.</p>
+            </div>
+            <div class="treatment-card">
+                <a href="./galeria.html">
+                    <img src="./imagenes/tratamientos/tratamiento2.jpg" alt="Masajes">
+                </a>
+                <h3>Masajes Terapéuticos</h3>
+                <p>Relájate y renueva tu energía.</p>
+            </div>
+            <div class="treatment-card">
+                <a href="./galeria.html">
+                    <img src="./imagenes/tratamientos/tratamiento3.jpg" alt="Láser">
+                </a>
+                <h3>Depilación Láser</h3>
+                <p>Elimina el vello con eficacia.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Sección Galería -->

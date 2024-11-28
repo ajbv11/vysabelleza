@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- control 1 -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -107,18 +108,51 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
             z-index: 2000;
+            overflow: hidden;
         }
 
         .modal img {
-            max-width: 80%;
+            max-width: 90%;
             max-height: 80%;
             border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
         }
 
+        /* Botones de Navegación */
+        .modal .prev,
+        .modal .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.6);
+            border: none;
+            color: #6B4E37;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .modal .prev:hover,
+        .modal .next:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .modal .prev {
+            left: 20px;
+        }
+
+        .modal .next {
+            right: 20px;
+        }
+
+        /* Cierre */
         .modal .close {
             position: absolute;
             top: 20px;
@@ -126,6 +160,17 @@
             color: white;
             font-size: 30px;
             cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -163,56 +208,61 @@
     <div class="modal" id="imageModal" role="dialog" aria-hidden="true" aria-labelledby="modalImage">
         <span class="close" id="closeModal" role="button" tabindex="0" aria-label="Cerrar modal">&times;</span>
         <img src="" alt="Imagen expandida" id="modalImage">
+        <button class="prev" id="prevButton" aria-label="Imagen anterior">⟨</button>
+        <button class="next" id="nextButton" aria-label="Imagen siguiente">⟩</button>
     </div>
 
-    <!-- Scripts -->
     <script>
-        function filterGallery(category) {
-            const allImages = document.querySelectorAll('.gallery img');
-
-            if (category === 'all') {
-                allImages.forEach(img => img.classList.remove('hidden'));
-            } else {
-                allImages.forEach(img => {
-                    img.classList.add('hidden');
-                    if (img.classList.contains(category)) {
-                        img.classList.remove('hidden');
-                    }
-                });
-            }
-        }
-
-        // Modal para ampliar imágenes
-        const galleryImages = document.querySelectorAll('.gallery img');
+        const body = document.body;
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const galleryImages = document.querySelectorAll('.gallery img');
+        let currentImageIndex = 0;
 
-        galleryImages.forEach((img) => {
+        const imagesArray = Array.from(galleryImages);
+
+        function showImage(index) {
+            currentImageIndex = (index + imagesArray.length) % imagesArray.length;
+            modalImage.src = imagesArray[currentImageIndex].src;
+        }
+
+        galleryImages.forEach((img, index) => {
             img.addEventListener('click', () => {
                 modal.style.display = 'flex';
                 modalImage.src = img.src;
                 modal.setAttribute('aria-hidden', 'false');
-            });
-
-            img.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    modal.style.display = 'flex';
-                    modalImage.src = img.src;
-                    modal.setAttribute('aria-hidden', 'false');
-                }
+                body.classList.add('no-scroll');
+                currentImageIndex = index;
             });
         });
 
         closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
+            body.classList.remove('no-scroll');
+        });
+
+        prevButton.addEventListener('click', () => {
+            showImage(currentImageIndex - 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+            showImage(currentImageIndex + 1);
         });
 
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                modal.setAttribute('aria-hidden', 'true');
+            if (modal.style.display === 'flex') {
+                if (event.key === 'Escape') {
+                    modal.style.display = 'none';
+                    body.classList.remove('no-scroll');
+                } else if (event.key === 'ArrowLeft') {
+                    showImage(currentImageIndex - 1);
+                } else if (event.key === 'ArrowRight') {
+                    showImage(currentImageIndex + 1);
+                }
             }
         });
 
@@ -220,8 +270,10 @@
             if (event.target === modal) {
                 modal.style.display = 'none';
                 modal.setAttribute('aria-hidden', 'true');
+                body.classList.remove('no-scroll');
             }
         });
     </script>
 </body>
 </html>
+

@@ -59,7 +59,7 @@
             text-align: center;
             padding: 100px 20px;
             background-color: #FFFFFF;
-            color: #6B4E37; /* Color actualizado */
+            color: #6B4E37;
         }
 
         .hero img {
@@ -81,6 +81,15 @@
             margin-bottom: 20px;
         }
 
+        .section p {
+            color: #6B4E37;
+        }
+
+        .contact-section h2 {
+            font-size: 32px;
+            color: #4A4A4A; /* Negro para sección de Contacto */
+        }
+
         .gallery-center {
             display: flex;
             flex-direction: column;
@@ -93,6 +102,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            cursor: pointer; /* Indica que es clickeable */
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-center img:hover {
+            transform: scale(1.05);
         }
 
         .agenda-boton, .boton-galeria {
@@ -183,12 +198,14 @@
     <div class="section gallery-center" id="galeria">
         <h2>Galería</h2>
         <p>Explora nuestros servicios y resultados en nuestra galería completa.</p>
-        <img src="./imagenes/galeria-principal.jpg" alt="Galería Principal">
+        <a href="./galeria.html">
+            <img src="./imagenes/galeria-principal.jpg" alt="Galería Principal">
+        </a>
         <a href="./galeria.html" class="boton-galeria">Ver Galería Completa</a>
     </div>
 
     <!-- Sección Contacto -->
-    <div class="section" id="contacto">
+    <div class="section contact-section" id="contacto">
         <h2>Contacto</h2>
         <p>Email: info@vysabelleza.es</p>
         <p>Teléfono: +34 634 664 945</p>

@@ -88,18 +88,20 @@
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
 
+        /* Estilo para imágenes expandidas */
         .expanded {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 80%;
-            height: auto;
-            max-height: 80%;
+            position: absolute;
             z-index: 2000;
+            width: auto;
+            height: auto;
+            max-width: 80%;
+            max-height: 80%;
+            left: 50%;
+            top: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 10px;
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
             background-color: #fff;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -149,14 +151,13 @@
             }
         }
 
-        // Expansión de imágenes al hacer clic
+        // Expansión y Reducción de Imágenes al Hacer Clic
         const images = document.querySelectorAll('.gallery img');
         images.forEach(img => {
             img.addEventListener('click', () => {
                 if (img.classList.contains('expanded')) {
                     img.classList.remove('expanded');
                 } else {
-                    // Quitar expansión de otras imágenes
                     document.querySelectorAll('.gallery img.expanded').forEach(expandedImg => {
                         expandedImg.classList.remove('expanded');
                     });
@@ -167,3 +168,4 @@
     </script>
 </body>
 </html>
+

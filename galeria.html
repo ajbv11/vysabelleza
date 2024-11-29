@@ -47,11 +47,21 @@
             padding: 0;
         }
 
+        header nav ul li {
+            display: inline-block;
+        }
+
         header nav ul li a {
             text-decoration: none;
             color: #6B4E37;
             font-weight: bold;
             font-size: 16px;
+            margin-left: -15px; /* Corrección hacia la izquierda */
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #A47C61;
         }
 
         .filters {
@@ -92,7 +102,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            user-select: none; /* Evita la selección de imágenes */
+            user-select: none; /* Evita selección */
             -webkit-user-drag: none; /* Deshabilita el arrastre en navegadores WebKit */
             user-drag: none; /* Desactiva el arrastre en navegadores estándar */
         }
@@ -129,6 +139,9 @@
             max-height: 80%;
             border-radius: 10px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            user-select: none; /* Evita selección */
+            -webkit-user-drag: none; /* Deshabilita el arrastre */
+            user-drag: none; /* Desactiva el arrastre */
         }
 
         .modal .close {
@@ -189,19 +202,19 @@
 
     <!-- Galería -->
     <div class="gallery">
-        <img src="./imagenes/galeria/labios/labios1.jpg" alt="Micropigmentación de Labios" class="labios">
-        <img src="./imagenes/galeria/labios/labios2.jpg" alt="Labios Sombreados" class="labios">
-        <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Microblading de Cejas" class="cejas">
-        <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Cejas Sombreadas" class="cejas">
-        <img src="./imagenes/galeria/pestanas/pestanas1.jpg" alt="Lifting de Pestañas" class="pestanas">
-        <img src="./imagenes/galeria/otros/otros1.jpg" alt="Otros Servicios" class="otros">
+        <img src="./imagenes/galeria/labios/labios1.jpg" alt="Micropigmentación de Labios" class="labios" draggable="false">
+        <img src="./imagenes/galeria/labios/labios2.jpg" alt="Labios Sombreados" class="labios" draggable="false">
+        <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Microblading de Cejas" class="cejas" draggable="false">
+        <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Cejas Sombreadas" class="cejas" draggable="false">
+        <img src="./imagenes/galeria/pestanas/pestanas1.jpg" alt="Lifting de Pestañas" class="pestanas" draggable="false">
+        <img src="./imagenes/galeria/otros/otros1.jpg" alt="Otros Servicios" class="otros" draggable="false">
     </div>
 
     <!-- Modal -->
     <div class="modal" id="imageModal">
         <span class="close" id="closeModal">&times;</span>
         <button class="prev" id="prevButton">⟨</button>
-        <img src="" alt="Imagen ampliada" id="modalImage">
+        <img src="" alt="Imagen ampliada" id="modalImage" draggable="false">
         <button class="next" id="nextButton">⟩</button>
     </div>
 
@@ -269,3 +282,4 @@
     </script>
 </body>
 </html>
+

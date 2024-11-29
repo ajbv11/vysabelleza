@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería Clasificada - VYSA Belleza</title>
+    <title>Galería VYSA Belleza</title>
     <style>
         body {
             margin: 0;
@@ -13,8 +13,34 @@
             text-align: center;
         }
 
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #EADDCB;
+            color: #6B4E37;
+            padding: 10px 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            height: 65px;
+        }
+
+        header .header-title {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #6B4E37;
+        }
+
         .filters {
-            margin: 20px 0;
+            margin: 100px 0 20px; /* Ajuste para espacio del header */
         }
 
         .filters button {
@@ -31,6 +57,18 @@
 
         .filters button:hover {
             background-color: #A47C61;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #6B4E37; /* Color igual al index */
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #6B4E37;
+            margin-bottom: 20px;
         }
 
         .gallery {
@@ -121,7 +159,11 @@
     </style>
 </head>
 <body>
-    <h1>Galería Clasificada</h1>
+    <!-- Header con Logo y Título -->
+    <header>
+        <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
+        <div class="header-title">Galería VYSA Belleza</div>
+    </header>
 
     <!-- Filtros -->
     <div class="filters">
@@ -132,6 +174,9 @@
         <button onclick="filterGallery('hialuropen')">Tratamientos Hialuropen</button>
         <button onclick="filterGallery('otros')">Otros</button>
     </div>
+
+    <!-- Título del Grupo -->
+    <h2 id="filterTitle">Todas las Imágenes</h2>
 
     <!-- Galería -->
     <div class="gallery">
@@ -156,23 +201,31 @@
     <script>
         let currentImageIndex = 0;
         let filteredImages = [];
-
         const galleryImages = document.querySelectorAll('.gallery img');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
+        const filterTitle = document.getElementById('filterTitle');
 
-        // Mostrar la imagen actual en el modal
         function showImage(index) {
             currentImageIndex = (index + filteredImages.length) % filteredImages.length;
             modalImage.src = filteredImages[currentImageIndex].src;
         }
 
-        // Filtrar imágenes según categoría
         function filterGallery(category) {
             const allImages = document.querySelectorAll('.gallery img');
+            const titles = {
+                all: 'Todas las Imágenes',
+                labios: 'Micropigmentación de Labios',
+                cejas: 'Micropigmentación de Cejas',
+                pestanas: 'Lifting de Pestañas',
+                hialuropen: 'Tratamientos Hialuropen',
+                otros: 'Otros Servicios'
+            };
+
+            filterTitle.textContent = titles[category];
 
             filteredImages = Array.from(allImages).filter(img => {
                 if (category === 'all') return true;
@@ -188,7 +241,6 @@
             });
         }
 
-        // Abrir el modal al hacer clic en una imagen
         galleryImages.forEach((img, index) => {
             img.addEventListener('click', () => {
                 filteredImages = Array.from(document.querySelectorAll('.gallery img:not(.hidden)'));
@@ -198,16 +250,13 @@
             });
         });
 
-        // Cerrar el modal
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
         });
 
-        // Navegación entre imágenes
         prevButton.addEventListener('click', () => showImage(currentImageIndex - 1));
         nextButton.addEventListener('click', () => showImage(currentImageIndex + 1));
 
-        // Navegación con teclado
         document.addEventListener('keydown', event => {
             if (!modal.classList.contains('active')) return;
 
@@ -216,9 +265,7 @@
             if (event.key === 'ArrowRight') showImage(currentImageIndex + 1);
         });
 
-        // Configuración inicial
         filterGallery('all');
     </script>
 </body>
 </html>
-

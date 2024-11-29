@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería - VYSA Belleza</title>
+    <title>Galería Clasificada - VYSA Belleza</title>
     <style>
         body {
             margin: 0;
@@ -59,7 +59,6 @@
 
         /* Modal */
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 100%;
@@ -69,7 +68,8 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            transition: transform 0.5s ease, left 0.5s ease;
+            transition: left 0.5s ease;
+            display: none; /* Inicialmente oculto */
         }
 
         .modal.active {
@@ -95,7 +95,7 @@
     </style>
 </head>
 <body>
-    <h1>Galería</h1>
+    <h1>Galería Clasificada</h1>
 
     <!-- Filtros -->
     <div class="filters">
@@ -148,8 +148,11 @@
         // Mostrar la imagen en el modal
         galleryImages.forEach((img) => {
             img.addEventListener('click', () => {
-                modalImage.src = img.src;
-                modal.classList.add('active');
+                modalImage.src = img.src; // Actualizar la imagen del modal
+                modal.style.display = 'flex'; // Asegurarse de que sea visible
+                setTimeout(() => {
+                    modal.classList.add('active'); // Iniciar la transición
+                }, 10); // Pequeño retraso para aplicar la transición
             });
         });
 
@@ -158,7 +161,7 @@
             modal.classList.remove('active');
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 500); // Tiempo de transición para la animación
+            }, 500); // Tiempo para completar la transición
         });
 
         // Cerrar el modal al hacer clic fuera de la imagen

@@ -59,22 +59,20 @@
 
         /* Modal */
         .modal {
+            display: none;
             position: fixed;
             top: 0;
-            left: 100%;
+            left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            transition: left 0.5s ease;
-            display: none; /* Inicialmente oculto */
         }
 
         .modal.active {
             display: flex;
-            left: 0;
         }
 
         .modal img {
@@ -91,6 +89,34 @@
             color: white;
             font-size: 30px;
             cursor: pointer;
+        }
+
+        .modal .prev,
+        .modal .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.6);
+            border: none;
+            color: #6B4E37;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .modal .prev:hover,
+        .modal .next:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .modal .prev {
+            left: 20px;
+        }
+
+        .modal .next {
+            right: 20px;
         }
     </style>
 </head>
@@ -122,7 +148,9 @@
     <!-- Modal -->
     <div class="modal" id="imageModal">
         <span class="close" id="closeModal">&times;</span>
+        <button class="prev" id="prevButton" aria-label="Imagen anterior">⟨</button>
         <img src="" alt="Imagen ampliada" id="modalImage">
+        <button class="next" id="nextButton" aria-label="Imagen siguiente">⟩</button>
     </div>
 
     <script>
@@ -139,48 +167,49 @@
             });
         }
 
-        // Modal para ampliar imágenes
+        // Modal para ampliar imágenes con navegación
         const galleryImages = document.querySelectorAll('.gallery img');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
 
-        // Mostrar la imagen en el modal
-        galleryImages.forEach((img) => {
+        let currentImageIndex = 0;
+
+        function showImage(index) {
+            currentImageIndex = (index + galleryImages.length) % galleryImages.length; // Ciclo infinito
+            modalImage.src = galleryImages[currentImageIndex].src;
+        }
+
+        galleryImages.forEach((img, index) => {
             img.addEventListener('click', () => {
-                modalImage.src = img.src; // Actualizar la imagen del modal
-                modal.style.display = 'flex'; // Asegurarse de que sea visible
-                setTimeout(() => {
-                    modal.classList.add('active'); // Iniciar la transición
-                }, 10); // Pequeño retraso para aplicar la transición
+                modal.classList.add('active');
+                showImage(index);
             });
         });
 
-        // Cerrar el modal al hacer clic en el botón de cierre
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 500); // Tiempo para completar la transición
         });
 
-        // Cerrar el modal al hacer clic fuera de la imagen
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.classList.remove('active');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 500);
-            }
+        prevButton.addEventListener('click', () => {
+            showImage(currentImageIndex - 1);
         });
 
-        // Cerrar el modal con la tecla Escape
+        nextButton.addEventListener('click', () => {
+            showImage(currentImageIndex + 1);
+        });
+
         document.addEventListener('keydown', (event) => {
-            if (modal.classList.contains('active') && event.key === 'Escape') {
-                modal.classList.remove('active');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 500);
+            if (modal.classList.contains('active')) {
+                if (event.key === 'Escape') {
+                    modal.classList.remove('active');
+                } else if (event.key === 'ArrowLeft') {
+                    showImage(currentImageIndex - 1);
+                } else if (event.key === 'ArrowRight') {
+                    showImage(currentImageIndex + 1);
+                }
             }
         });
     </script>

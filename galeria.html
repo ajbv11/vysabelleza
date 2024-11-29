@@ -29,14 +29,67 @@
         }
 
         header img {
-            height: 65px;
+            height: 50px;
         }
 
-        header .header-title {
-            font-family: 'Georgia', serif;
+        header .menu-toggle {
+            display: none;
             font-size: 24px;
-            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
             color: #6B4E37;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
+
+        header nav ul li {
+            margin: 0;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #6B4E37;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #A47C61;
+        }
+
+        @media (max-width: 768px) {
+            header .menu-toggle {
+                display: block;
+            }
+
+            header nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #EADDCB;
+                padding: 10px 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            header nav ul.active {
+                display: flex;
+            }
         }
 
         .filters {
@@ -61,8 +114,10 @@
 
         h1 {
             font-size: 32px;
-            color: #6B4E37; /* Color igual al index */
+            color: #6B4E37;
+            margin-top: 80px; /* Espacio para el header */
             margin-bottom: 10px;
+            text-align: center; /* Centrado del título */
         }
 
         h2 {
@@ -159,10 +214,18 @@
     </style>
 </head>
 <body>
-    <!-- Header con Logo y Título -->
+    <!-- Header con Logo y Menú -->
     <header>
         <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
-        <div class="header-title">Galería VYSA Belleza</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#tratamientos">Tratamientos</a></li>
+                <li><a href="galeria.html">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Filtros -->
@@ -176,7 +239,8 @@
     </div>
 
     <!-- Título del Grupo -->
-    <h2 id="filterTitle">Todas las Imágenes</h2>
+    <h1 id="filterTitle">Galería VYSA Belleza</h1>
+    <h2 id="filterGroupTitle">Todas las Imágenes</h2>
 
     <!-- Galería -->
     <div class="gallery">
@@ -199,8 +263,6 @@
     </div>
 
     <script>
-        let currentImageIndex = 0;
-        let filteredImages = [];
         const galleryImages = document.querySelectorAll('.gallery img');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
@@ -208,6 +270,14 @@
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
         const filterTitle = document.getElementById('filterTitle');
+        const filterGroupTitle = document.getElementById('filterGroupTitle');
+
+        let currentImageIndex = 0;
+        let filteredImages = [];
+
+        function toggleMenu() {
+            document.querySelector('nav ul').classList.toggle('active');
+        }
 
         function showImage(index) {
             currentImageIndex = (index + filteredImages.length) % filteredImages.length;
@@ -225,7 +295,7 @@
                 otros: 'Otros Servicios'
             };
 
-            filterTitle.textContent = titles[category];
+            filterGroupTitle.textContent = titles[category];
 
             filteredImages = Array.from(allImages).filter(img => {
                 if (category === 'all') return true;

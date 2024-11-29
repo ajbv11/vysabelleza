@@ -22,28 +22,27 @@
             color: #6B4E37;
             padding: 10px 20px;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         header img {
             height: 50px;
         }
 
-        header .menu-toggle {
-            display: none;
+        header .header-title {
+            font-family: 'Georgia', serif;
             font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
+            font-weight: bold;
             color: #6B4E37;
+            flex: 1; /* Expande el espacio */
+            text-align: center;
         }
 
         header nav {
             display: flex;
-            gap: 20px;
         }
 
         header nav ul {
@@ -70,11 +69,16 @@
             color: #A47C61;
         }
 
-        @media (max-width: 768px) {
-            header .menu-toggle {
-                display: block;
-            }
+        header .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #6B4E37;
+        }
 
+        @media (max-width: 768px) {
             header nav ul {
                 display: none;
                 flex-direction: column;
@@ -89,6 +93,10 @@
 
             header nav ul.active {
                 display: flex;
+            }
+
+            header .menu-toggle {
+                display: block;
             }
         }
 
@@ -110,14 +118,6 @@
 
         .filters button:hover {
             background-color: #A47C61;
-        }
-
-        h1 {
-            font-size: 32px;
-            color: #6B4E37;
-            margin-top: 80px; /* Espacio para el header */
-            margin-bottom: 10px;
-            text-align: center; /* Centrado del título */
         }
 
         h2 {
@@ -214,16 +214,14 @@
     </style>
 </head>
 <body>
-    <!-- Header con Logo y Menú -->
+    <!-- Header con Logo, Título Centrado y Menú -->
     <header>
         <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
+        <div class="header-title">Galería VYSA Belleza</div>
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="#tratamientos">Tratamientos</a></li>
-                <li><a href="galeria.html">Galería</a></li>
-                <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -239,7 +237,6 @@
     </div>
 
     <!-- Título del Grupo -->
-    <h1 id="filterTitle">Galería VYSA Belleza</h1>
     <h2 id="filterGroupTitle">Todas las Imágenes</h2>
 
     <!-- Galería -->
@@ -269,7 +266,6 @@
         const closeModal = document.getElementById('closeModal');
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
-        const filterTitle = document.getElementById('filterTitle');
         const filterGroupTitle = document.getElementById('filterGroupTitle');
 
         let currentImageIndex = 0;

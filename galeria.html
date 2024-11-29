@@ -37,24 +37,14 @@
             font-size: 24px;
             font-weight: bold;
             color: #6B4E37;
-            flex: 1; /* Expande el espacio */
+            flex: 1;
             text-align: center;
         }
 
-        header nav {
-            display: flex;
-        }
-
         header nav ul {
-            display: flex;
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 20px;
-        }
-
-        header nav ul li {
-            margin: 0;
         }
 
         header nav ul li a {
@@ -62,42 +52,31 @@
             color: #6B4E37;
             font-weight: bold;
             font-size: 16px;
-            transition: color 0.3s ease;
         }
 
-        header nav ul li a:hover {
-            color: #A47C61;
+        .filters {
+            margin: 100px 0 20px;
         }
 
-        header .menu-toggle {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
+        .filters button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #6B4E37;
+            color: #FFFFFF;
             border: none;
-            color: #6B4E37;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        @media (max-width: 768px) {
-            header nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background-color: #EADDCB;
-                padding: 10px 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
+        .filters button:hover {
+            background-color: #A47C61;
+        }
 
-            header nav ul.active {
-                display: flex;
-            }
-
-            header .menu-toggle {
-                display: block;
-            }
+        h2 {
+            font-size: 24px;
+            color: #6B4E37;
+            margin-bottom: 20px;
         }
 
         .gallery {
@@ -111,9 +90,8 @@
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            pointer-events: none; /* Desactiva interacciones */
-            -webkit-user-drag: none; /* Evita arrastrar en navegadores WebKit */
         }
 
         .gallery img:hover {
@@ -125,24 +103,65 @@
             display: none;
         }
 
-        .image-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .image-wrapper .overlay {
-            position: absolute;
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0); /* Capa transparente */
-            cursor: default; /* Cambia el cursor */
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .modal .prev,
+        .modal .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.6);
+            border: none;
+            color: #6B4E37;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+        }
+
+        .modal .prev {
+            left: 20px;
+        }
+
+        .modal .next {
+            right: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Header con Logo, Título Centrado y Menú -->
+    <!-- Header -->
     <header>
         <img src="./imagenes/logo-vysa.png" alt="Logo VYSA Belleza">
         <div class="header-title">Galería VYSA Belleza</div>
@@ -153,33 +172,91 @@
         </nav>
     </header>
 
+    <!-- Filtros -->
+    <div class="filters">
+        <button onclick="filterGallery('all')">Todos</button>
+        <button onclick="filterGallery('labios')">Micropigmentación de Labios</button>
+        <button onclick="filterGallery('cejas')">Micropigmentación de Cejas</button>
+        <button onclick="filterGallery('pestanas')">Lifting de Pestañas</button>
+        <button onclick="filterGallery('otros')">Otros</button>
+    </div>
+
+    <!-- Título Dinámico del Grupo -->
+    <h2 id="filterTitle">Todas las Imágenes</h2>
+
     <!-- Galería -->
     <div class="gallery">
-        <div class="image-wrapper">
-            <img src="./imagenes/galeria/labios/labios1.jpg" alt="Resultado de micropigmentación de labios">
-            <div class="overlay"></div>
-        </div>
-        <div class="image-wrapper">
-            <img src="./imagenes/galeria/labios/labios2.jpg" alt="Resultado de micropigmentación de labios sombreado">
-            <div class="overlay"></div>
-        </div>
-        <div class="image-wrapper">
-            <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Resultado de micropigmentación de cejas">
-            <div class="overlay"></div>
-        </div>
-        <div class="image-wrapper">
-            <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Resultado de micropigmentación de cejas sombreado">
-            <div class="overlay"></div>
-        </div>
+        <img src="./imagenes/galeria/labios/labios1.jpg" alt="Micropigmentación de Labios" class="labios">
+        <img src="./imagenes/galeria/labios/labios2.jpg" alt="Labios Sombreados" class="labios">
+        <img src="./imagenes/galeria/cejas/cejas1.jpg" alt="Microblading de Cejas" class="cejas">
+        <img src="./imagenes/galeria/cejas/cejas2.jpg" alt="Cejas Sombreadas" class="cejas">
+        <img src="./imagenes/galeria/pestanas/pestanas1.jpg" alt="Lifting de Pestañas" class="pestanas">
+        <img src="./imagenes/galeria/otros/otros1.jpg" alt="Otros Servicios" class="otros">
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <span class="close" id="closeModal">&times;</span>
+        <button class="prev" id="prevButton">⟨</button>
+        <img src="" alt="Imagen ampliada" id="modalImage">
+        <button class="next" id="nextButton">⟩</button>
     </div>
 
     <script>
-        // Desactiva el clic derecho en imágenes
-        document.addEventListener('contextmenu', (event) => {
-            if (event.target.tagName === 'IMG') {
-                event.preventDefault();
-            }
+        const galleryImages = document.querySelectorAll('.gallery img');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const filterTitle = document.getElementById('filterTitle');
+
+        let currentImageIndex = 0;
+        let filteredImages = [];
+
+        function showImage(index) {
+            currentImageIndex = (index + filteredImages.length) % filteredImages.length;
+            modalImage.src = filteredImages[currentImageIndex].src;
+        }
+
+        function filterGallery(category) {
+            const allImages = document.querySelectorAll('.gallery img');
+            const titles = {
+                all: 'Todas las Imágenes',
+                labios: 'Micropigmentación de Labios',
+                cejas: 'Micropigmentación de Cejas',
+                pestanas: 'Lifting de Pestañas',
+                otros: 'Otros Servicios'
+            };
+
+            filterTitle.textContent = titles[category];
+
+            filteredImages = Array.from(allImages).filter(img =>
+                category === 'all' || img.classList.contains(category)
+            );
+
+            allImages.forEach(img => {
+                img.style.display = filteredImages.includes(img) ? 'block' : 'none';
+            });
+        }
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                filteredImages = Array.from(document.querySelectorAll('.gallery img:not([style*="display: none"])'));
+                currentImageIndex = filteredImages.indexOf(img);
+                modal.classList.add('active');
+                showImage(currentImageIndex);
+            });
         });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        prevButton.addEventListener('click', () => showImage(currentImageIndex - 1));
+        nextButton.addEventListener('click', () => showImage(currentImageIndex + 1));
+
+        filterGallery('all');
     </script>
 </body>
 </html>

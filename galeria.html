@@ -92,6 +92,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            pointer-events: none; /* Desactiva interacciones */
+            -webkit-user-drag: none; /* Deshabilita el arrastre en navegadores WebKit */
+            user-drag: none; /* Desactiva el arrastre en navegadores estándar */
         }
 
         .gallery img:hover {
@@ -255,6 +258,12 @@
 
         prevButton.addEventListener('click', () => showImage(currentImageIndex - 1));
         nextButton.addEventListener('click', () => showImage(currentImageIndex + 1));
+
+        document.addEventListener('contextmenu', event => {
+            if (event.target.tagName === 'IMG') {
+                event.preventDefault(); // Deshabilitar clic derecho
+            }
+        });
 
         filterGallery('all');
     </script>
